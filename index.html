@@ -175,7 +175,7 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.4);
         }
         
-        /* รูปเลื่อนอัตโนมัติ + แนวนอน */
+        /* รูปเลื่อนอัตโนมัติแนวนอน จากขวาไปซ้ายแบบสมูทใหม่ */
         .slider-wrapper {
             margin-top: 32px;
             overflow-x: auto;
@@ -187,14 +187,17 @@
             cursor: grab;
             user-select: none;
             scroll-behavior: smooth;
+            position: relative;
         }
         .slider-wrapper:active {
             cursor: grabbing;
         }
         .slider-images {
             display: inline-flex;
+            flex-direction: row;
             gap: 16px;
             padding: 0 8px;
+            will-change: transform;
         }
         .slider-images img {
             width: 140px;
@@ -449,6 +452,10 @@
             .service-card { padding: 1.2rem 0.5rem; }
             .nav-hamburger { top: 12px; left: 12px; width: 46px; height: 46px; font-size: 24px; }
         }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -476,6 +483,7 @@
             บริการรถดูดส้วม ขุดเพิ่มบ่อ ดูดน้ำเสีย น้ำไขมัน ท่ออุดตัน<br>
             บริการด้วยใจ รวดเร็วฉับไว ไปทุกที่
         </p>
+        <!-- รูปเลื่อนแนวนอน: ขวาไปซ้าย ใหม่สมูท -->
         <div class="slider-wrapper" id="imageSlider">
             <div class="slider-images" id="sliderInner">
                 <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=500" alt="รถดูดส้วม">
@@ -578,43 +586,70 @@
 <div id="backToTop" class="back2top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
 
 <script>
-    // ---------- 1. รูปเลื่อนอัตโนมัติ (วนซ้ายขวาสมูท) ----------
-    const sliderWrapper = document.getElementById('imageSlider');
-    let autoScrollInterval;
-    let isUserInteracting = false;
-
-    function startAutoScroll() {
-        if (autoScrollInterval) clearInterval(autoScrollInterval);
-        autoScrollInterval = setInterval(() => {
-            if (!isUserInteracting && sliderWrapper) {
-                const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-                let nextScroll = sliderWrapper.scrollLeft + 1.8;
-                if (nextScroll >= maxScroll) {
-                    nextScroll = 0;
-                }
-                sliderWrapper.scrollTo({ left: nextScroll, behavior: 'smooth' });
-            }
-        }, 45);
-    }
-    function stopAutoScroll() { if (autoScrollInterval) clearInterval(autoScrollInterval); }
+    // ---------- 1. เลื่อนรูปอัตโนมัติแบบ SMOOTH ขวาไปซ้าย (Loop) ----------
+    const sliderContainer = document.getElementById('imageSlider');
+    const sliderInner = document.getElementById('sliderInner');
+    let autoInterval;
+    let isDragging = false;
+    let isAutoScrolling = true;
     
-    if (sliderWrapper) {
-        sliderWrapper.addEventListener('mousedown', () => { isUserInteracting = true; stopAutoScroll(); });
-        sliderWrapper.addEventListener('mouseup', () => { setTimeout(() => { isUserInteracting = false; startAutoScroll(); }, 2000); });
-        sliderWrapper.addEventListener('touchstart', () => { isUserInteracting = true; stopAutoScroll(); });
-        sliderWrapper.addEventListener('touchend', () => { setTimeout(() => { isUserInteracting = false; startAutoScroll(); }, 2000); });
-        let isDown = false, startX, scrollLeftVal;
-        sliderWrapper.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - sliderWrapper.offsetLeft; scrollLeftVal = sliderWrapper.scrollLeft; stopAutoScroll(); });
-        sliderWrapper.addEventListener('mouseleave', () => { isDown = false; setTimeout(() => { if(!isUserInteracting) startAutoScroll(); }, 1500); });
-        sliderWrapper.addEventListener('mouseup', () => { isDown = false; setTimeout(() => { if(!isUserInteracting) startAutoScroll(); }, 1500); });
-        sliderWrapper.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - sliderWrapper.offsetLeft; const walk = (x - startX) * 1.2; sliderWrapper.scrollLeft = scrollLeftVal - walk; });
-        sliderWrapper.addEventListener('touchstart', (e) => { isDown = true; startX = e.touches[0].pageX - sliderWrapper.offsetLeft; scrollLeftVal = sliderWrapper.scrollLeft; stopAutoScroll(); });
-        sliderWrapper.addEventListener('touchend', () => { isDown = false; setTimeout(() => { if(!isUserInteracting) startAutoScroll(); }, 1500); });
-        sliderWrapper.addEventListener('touchmove', (e) => { if(!isDown) return; const x = e.touches[0].pageX - sliderWrapper.offsetLeft; const walk = (x - startX) * 1.2; sliderWrapper.scrollLeft = scrollLeftVal - walk; });
+    function smoothScrollRightToLeft() {
+        if (!sliderContainer || !isAutoScrolling) return;
+        const step = 1.6; // ความเร็วสมูท
+        let currentScroll = sliderContainer.scrollLeft;
+        const maxScroll = sliderContainer.scrollWidth - sliderContainer.clientWidth;
+        let nextScroll = currentScroll + step;
+        if (nextScroll >= maxScroll) {
+            // วนกลับไปที่จุดเริ่มต้นแบบเนียนๆ (reset)
+            nextScroll = 0;
+        }
+        sliderContainer.scrollTo({ left: nextScroll, behavior: 'smooth' });
+    }
+    
+    function startAutoScroll() {
+        if (autoInterval) clearInterval(autoInterval);
+        isAutoScrolling = true;
+        autoInterval = setInterval(() => {
+            if (!isDragging && sliderContainer && isAutoScrolling) {
+                smoothScrollRightToLeft();
+            }
+        }, 38); // 38ms ทำให้ต่อเนื่องนุ่มนวล
+    }
+    
+    function stopAutoScroll() {
+        if (autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+        }
+        isAutoScrolling = false;
+    }
+    
+    // รองรับการลากและแตะ
+    if (sliderContainer) {
+        const startAutoAfterDrag = () => {
+            setTimeout(() => {
+                if (!isDragging && !autoInterval) {
+                    startAutoScroll();
+                }
+            }, 2000);
+        };
+        
+        sliderContainer.addEventListener('mousedown', () => { isDragging = true; stopAutoScroll(); });
+        sliderContainer.addEventListener('mouseup', () => { isDragging = false; startAutoAfterDrag(); });
+        sliderContainer.addEventListener('mouseleave', () => { isDragging = false; startAutoAfterDrag(); });
+        
+        sliderContainer.addEventListener('touchstart', () => { isDragging = true; stopAutoScroll(); });
+        sliderContainer.addEventListener('touchend', () => { isDragging = false; startAutoAfterDrag(); });
+        
+        // ป้องกัน default drag รูป
+        sliderContainer.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+        
         startAutoScroll();
     }
     
-    // ---------- 2. เมนูแฮมเบอร์เกอร์ + ปิด/เปิด + เลื่อนไปยังส่วนต่างๆ แบบสมูทและวนปิดเมนูอัตโนมัติ ----------
+    // ---------- 2. เมนูแฮมเบอร์เกอร์ + ปิด/เปิด + เลื่อนไปยังส่วนต่างๆ ----------
     const hamburger = document.getElementById('hamburgerBtn');
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
@@ -622,7 +657,6 @@
     function openMenu() { sideMenu.classList.add('open'); overlay.classList.add('active'); }
     hamburger.addEventListener('click', (e) => { e.stopPropagation(); if(sideMenu.classList.contains('open')) closeMenu(); else openMenu(); });
     overlay.addEventListener('click', closeMenu);
-    // กดลิงค์ในเมนู: เลื่อนไปยังส่วน + ปิดเมนู
     document.querySelectorAll('.side-menu a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -635,7 +669,7 @@
         });
     });
     
-    // ---------- 3. Modal ยืนยันสำหรับโทร/Line/FB (ป๊อปอัพ) ----------
+    // ---------- 3. Modal ยืนยันสำหรับโทร/Line/FB ----------
     function showConfirmDialog(options) {
         const existing = document.getElementById('dynamicConfirmModal');
         if(existing) existing.remove();
@@ -683,7 +717,7 @@
         modalDiv.addEventListener('click', (e) => { if(e.target === modalDiv) close(); });
     }
     
-    // จัดการ FAB
+    // FAB interactions
     const fabMain = document.getElementById('fabMain');
     const fabMenuDiv = document.getElementById('fabMenu');
     fabMain.addEventListener('click', (e) => { e.stopPropagation(); fabMenuDiv.classList.toggle('open'); fabMain.classList.toggle('active'); });
@@ -696,11 +730,11 @@
     // Back to top
     window.addEventListener('scroll', () => { const btn = document.getElementById('backToTop'); if (window.scrollY > 400) btn.classList.add('show'); else btn.classList.remove('show'); });
     
-    // ป้องกัน devtools
+    // ป้องกันการคัดลอก / devtools พื้นฐาน
     document.addEventListener('contextmenu', (e) => { e.preventDefault(); alert("🔒 เนื้อหาได้รับการปกป้อง | สอบถามข้อมูลเพิ่มเติมโทร 081-075-0833"); return false; });
     document.addEventListener('keydown', (e) => { if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's')) { e.preventDefault(); alert("🚫 ฟังก์ชันนี้ถูกจำกัดการใช้งาน"); return false; } });
     
-    // FAQ schema
+    // FAQ Schema
     const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "ให้บริการพื้นที่ใดบ้าง?", "acceptedAnswer": { "@type": "Answer", "text": "ให้บริการทั่วจังหวัดอุบลราชธานี รวมถึงเทศบาลนครอุบล ขามใหญ่ ปทุม และอำเภอใกล้เคียง" } }, { "@type": "Question", "name": "ค่าบริการดูดส้วมราคาเท่าไหร่?", "acceptedAnswer": { "@type": "Answer", "text": "ราคาเริ่มต้น 500 บาท ขึ้นอยู่กับระยะทางและลักษณะงาน โทรสอบถามฟรี" } }, { "@type": "Question", "name": "เปิดให้บริการกี่โมง?", "acceptedAnswer": { "@type": "Answer", "text": "เปิดบริการตลอด 24 ชั่วโมงทุกวัน ไม่มีวันหยุด" } }] };
     const scriptFaq = document.createElement('script'); scriptFaq.type = 'application/ld+json'; scriptFaq.textContent = JSON.stringify(faqSchema); document.head.appendChild(scriptFaq);
     window.addEventListener('dragstart', e => e.preventDefault());
