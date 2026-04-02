@@ -34,7 +34,7 @@
 
         body {
             font-family: 'Sarabun', 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f4f7fc;
+            background: #f0f4f8;
             color: #1a2c3e;
             line-height: 1.5;
             scroll-behavior: smooth;
@@ -52,7 +52,7 @@
             top: 20px;
             left: 20px;
             z-index: 2000;
-            background: linear-gradient(135deg, #1e7e34, #27ae60);
+            background: linear-gradient(135deg, #0066cc, #0088ff);
             width: 52px;
             height: 52px;
             border-radius: 50%;
@@ -76,7 +76,7 @@
             left: -280px;
             width: 280px;
             height: 100%;
-            background: linear-gradient(180deg, #ffffff, #f5faf7);
+            background: linear-gradient(180deg, #ffffff, #f0f7ff);
             z-index: 1999;
             box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
             transition: left 0.3s ease;
@@ -94,7 +94,7 @@
             padding: 16px 28px;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #1f3b2c;
+            color: #1a3a5c;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -106,12 +106,12 @@
         .side-menu a i {
             width: 28px;
             font-size: 1.3rem;
-            color: #1e7e34;
+            color: #0066cc;
         }
 
         .side-menu a:hover {
-            background: #eef3e9;
-            border-left-color: #1e7e34;
+            background: #e6f0ff;
+            border-left-color: #0066cc;
             padding-left: 32px;
         }
 
@@ -165,7 +165,7 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.4);
         }
 
-        /* รูปเลื่อนอัตโนมัติแบบลื่น */
+        /* รูปเลื่อนอัตโนมัติสลับซ้าย-ขวา */
         .slider-wrapper {
             margin-top: 32px;
             overflow-x: auto;
@@ -177,6 +177,7 @@
             cursor: grab;
             user-select: none;
             position: relative;
+            scroll-behavior: auto;
         }
 
         .slider-wrapper:active {
@@ -203,7 +204,7 @@
         }
 
         .contact-banner {
-            background: #c72a2a;
+            background: linear-gradient(135deg, #004499, #0066cc);
             padding: 20px 16px;
             margin-top: 32px;
             border-radius: 32px;
@@ -219,7 +220,7 @@
 
         .contact-banner a {
             background: white;
-            color: #c72a2a;
+            color: #0066cc;
             padding: 12px 26px;
             border-radius: 60px;
             font-weight: 800;
@@ -232,7 +233,7 @@
         }
 
         .contact-banner a:hover {
-            background: #fff5e6;
+            background: #e6f0ff;
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(0,0,0,0.15);
         }
@@ -246,6 +247,23 @@
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0,0,0,0.02);
             transition: all 0.25s ease;
             scroll-margin-top: 80px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* การ์ดคู่สลับด้าน */
+        .card:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        
+        .card:nth-child(even) {
+            transform: translateX(30px);
         }
 
         .card:hover {
@@ -256,7 +274,7 @@
             font-size: 1.9rem;
             font-weight: 700;
             margin-bottom: 1.6rem;
-            color: #0c4e34;
+            color: #004499;
             display: flex;
             align-items: center;
             gap: 0.7rem;
@@ -275,7 +293,7 @@
             padding: 1.8rem 1rem;
             text-align: center;
             transition: all 0.25s ease;
-            border: 1px solid #e6edf3;
+            border: 1px solid #e0ecf9;
             box-shadow: 0 6px 18px rgba(0,0,0,.04);
             cursor: default;
         }
@@ -283,28 +301,28 @@
         .service-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 30px rgba(0,0,0,.1);
-            border-color: #1e7e34;
-            background: #fefef9;
+            border-color: #0066cc;
+            background: #f8fcff;
         }
 
         .service-card i {
             font-size: 2.8rem;
             margin-bottom: 14px;
-            color: #1e7e34;
+            color: #0066cc;
             display: block;
         }
 
         .service-card span:last-child {
             font-weight: 700;
             font-size: 1.05rem;
-            color: #1f3b2c;
+            color: #1a3a5c;
         }
 
         .testimonial {
-            background: #f4f7f9;
+            background: #f0f7ff;
             border-radius: 24px;
             padding: 1.6rem 1.8rem;
-            border-left: 5px solid #1e7e34;
+            border-left: 5px solid #0066cc;
             font-size: 1rem;
             box-shadow: 0 6px 14px rgba(0,0,0,.04);
             margin: 1.5rem 0;
@@ -318,11 +336,11 @@
         }
 
         .area-tag {
-            background: #eef3fc;
+            background: #e6f0ff;
             padding: 0.5rem 1.4rem;
             border-radius: 60px;
             font-weight: 600;
-            color: #1c5a3e;
+            color: #004499;
             font-size: 0.9rem;
         }
 
@@ -341,6 +359,7 @@
             border-radius: 40px;
             flex: 1;
             min-width: 100px;
+            color: #004499;
         }
 
         hr {
@@ -404,17 +423,17 @@
             font-size: 26px;
         }
 
-        .fab-item.call { background: #1e7e34; color: white; }
+        .fab-item.call { background: #0066cc; color: white; }
         .fab-item.line { background: #00b900; color: white; }
         .fab-item.fb { background: #1877f2; color: white; }
-        .fab-item.phone2 { background: #ff8c42; color: white; }
+        .fab-item.phone2 { background: #0088ff; color: white; }
         .fab-item:hover { transform: scale(1.08); }
 
         .fab-main {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: #c72a2a;
+            background: linear-gradient(135deg, #004499, #0066cc);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
@@ -433,7 +452,7 @@
             position: fixed;
             bottom: 100px;
             right: 20px;
-            background: #1e7e34;
+            background: #0066cc;
             width: 46px;
             height: 46px;
             border-radius: 30px;
@@ -464,6 +483,16 @@
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
         }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
@@ -489,7 +518,7 @@
         <h1><i class="fas fa-tools"></i> โชคสมัยสูบส้วม</h1>
         <p>บริการรถดูดส้วม ขุดเพิ่มบ่อ ดูดน้ำเสีย น้ำไขมัน ท่ออุดตัน<br> บริการด้วยใจ รวดเร็วฉับไว ไปทุกที่</p>
         
-        <!-- รูปเลื่อนแนวนอน -->
+        <!-- รูปเลื่อนแนวนอนสลับซ้าย-ขวา -->
         <div class="slider-wrapper" id="imageSlider">
             <div class="slider-images" id="sliderInner">
                 <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=500" alt="รถดูดส้วม">
@@ -498,6 +527,9 @@
                 <img src="https://images.unsplash.com/photo-1581579188871-45ea61f2a1e8?q=80&w=500" alt="ทีมงานมืออาชีพ">
                 <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=500" alt="บริการดูดไขมัน">
                 <img src="https://images.unsplash.com/photo-1575424907793-aa79a994e1b5?q=80&w=500" alt="ท่อระบายน้ำ">
+                <!-- เพิ่มรูปให้เลื่อนได้ยาวขึ้น -->
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=500" alt="รถดูดส้วม 2">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=500" alt="การสูบส้วม 2">
             </div>
         </div>
         
@@ -510,7 +542,7 @@
 
     <!-- บริการ -->
     <div id="services" class="card">
-        <div class="section-title"><i class="fas fa-star-of-life" style="color:#1e7e34;"></i> บริการของเรา <span>ครบวงจร อุบลราชธานี</span></div>
+        <div class="section-title"><i class="fas fa-star-of-life" style="color:#0066cc;"></i> บริการของเรา <span>ครบวงจร อุบลราชธานี</span></div>
         <div class="service-grid">
             <div class="service-card"><i class="fas fa-truck"></i><span>รถดูดส้วม</span></div>
             <div class="service-card"><i class="fas fa-hard-hat"></i><span>รับขุดเพิ่มบ่อ</span></div>
@@ -520,7 +552,7 @@
             <div class="service-card"><i class="fas fa-toilet"></i><span>ชักโครกตัน / อ่างล้างจาน</span></div>
         </div>
         <div class="testimonial">
-            <i class="fas fa-quote-left" style="margin-right: 8px; color:#1e7e34;"></i> "แก้ไขตรงจุด ไม่เสียเงินซ้ำซ้อน พร้อมให้บริการ สอบถามฟรี โทรได้ตลอด 24 ชั่วโมง"<br>
+            <i class="fas fa-quote-left" style="margin-right: 8px; color:#0066cc;"></i> "แก้ไขตรงจุด ไม่เสียเงินซ้ำซ้อน พร้อมให้บริการ สอบถามฟรี โทรได้ตลอด 24 ชั่วโมง"<br>
             📞 ทีมงานพร้อมให้คำปรึกษาโดยช่างผู้ชำนาญเฉพาะทาง
         </div>
     </div>
@@ -552,8 +584,8 @@
     <div id="contact-card" class="card">
         <div class="section-title"><i class="fas fa-headset"></i> ติดต่อสอบถาม / จองบริการด่วน</div>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-            <button class="quick-call" data-phone="0810750833" style="background: #1e7e34; color:white; border:none; padding:12px 24px; border-radius:60px; cursor:pointer;"><i class="fas fa-phone-alt"></i> 081-075-0833</button>
-            <button class="quick-call" data-phone="0957462811" style="background: #ff8c42; color:white; border:none; padding:12px 24px; border-radius:60px; cursor:pointer;"><i class="fas fa-mobile-alt"></i> 095-746-2811</button>
+            <button class="quick-call" data-phone="0810750833" style="background: #0066cc; color:white; border:none; padding:12px 24px; border-radius:60px; cursor:pointer;"><i class="fas fa-phone-alt"></i> 081-075-0833</button>
+            <button class="quick-call" data-phone="0957462811" style="background: #0088ff; color:white; border:none; padding:12px 24px; border-radius:60px; cursor:pointer;"><i class="fas fa-mobile-alt"></i> 095-746-2811</button>
         </div>
         <p style="text-align: center; margin-top: 1rem;">🚀 โทรเลยวันนี้ รับบริการทันใจ มาตรฐานมืออาชีพ</p>
     </div>
@@ -564,13 +596,13 @@
         <div style="border-radius: 1.5rem; overflow: hidden; margin-bottom: 1rem;">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.558765865889!2d104.859346!3d15.244995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116b0b1b1b1b1b1%3A0x0!2z4LmA4Lil4Liy4Lil4Liy4Lil4Lix4Lii4LmA4Lil4Liw4Lya4Lij4Li14Lii4Liy4Lil4Lix4Lii!5e0!3m2!1sth!2sth!4v1699980000000" width="100%" height="270" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-        <p style="font-size: 0.95rem; background: #eef3f0; padding: 14px; border-radius: 24px;">📍 ให้บริการครอบคลุมเขตเทศบาลนครอุบลฯ และทุกอำเภอในจังหวัดอุบลราชธานี พร้อมทีมงานเฉพาะทาง</p>
+        <p style="font-size: 0.95rem; background: #e6f0ff; padding: 14px; border-radius: 24px;">📍 ให้บริการครอบคลุมเขตเทศบาลนครอุบลฯ และทุกอำเภอในจังหวัดอุบลราชธานี พร้อมทีมงานเฉพาะทาง</p>
     </div>
 
     <footer class="footer">
         <p>© 2025 โชคสมัยสูบส้วม | รถดูดส้วมอุบลราชธานี บริการด้วยใจ รวดเร็ว ฉับไว ไปทุกที่</p>
         <p>📞 โทร 081-075-0833 , 095-746-2811 | ไลน์ @choksmai</p>
-        <p><a href="#top" style="color:#1e7e34; text-decoration: none;"><i class="fas fa-arrow-up"></i> กลับสู่ด้านบน</a></p>
+        <p><a href="#top" style="color:#0066cc; text-decoration: none;"><i class="fas fa-arrow-up"></i> กลับสู่ด้านบน</a></p>
     </footer>
 </div>
 
@@ -592,18 +624,29 @@
 </div>
 
 <script>
-    // ---------- 1. รูปเลื่อนอัตโนมัติแบบลื่น (requestAnimationFrame) ----------
+    // ---------- 1. รูปเลื่อนอัตโนมัติสลับซ้าย-ขวาแบบสมูท ----------
     const slider = document.getElementById("imageSlider");
-    let scrollSpeed = 0.8;
+    let scrollSpeed = 0.6;
     let isHover = false;
+    let direction = 1; // 1 = ขวา, -1 = ซ้าย
     let animFrame;
 
     function autoScroll() {
         if (!isHover && slider) {
-            slider.scrollLeft += scrollSpeed;
-            if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-                slider.scrollLeft = 0;
+            let newScrollLeft = slider.scrollLeft + (scrollSpeed * direction);
+            
+            // ตรวจสอบขอบเขต
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            
+            if (newScrollLeft >= maxScroll) {
+                newScrollLeft = maxScroll;
+                direction = -1; // เปลี่ยนทิศทางเป็นซ้าย
+            } else if (newScrollLeft <= 0) {
+                newScrollLeft = 0;
+                direction = 1; // เปลี่ยนทิศทางเป็นขวา
             }
+            
+            slider.scrollLeft = newScrollLeft;
         }
         animFrame = requestAnimationFrame(autoScroll);
     }
@@ -659,7 +702,31 @@
         });
     });
 
-    // ---------- 3. Modal ยืนยันการโทร ----------
+    // ---------- 3. Animation ตอนเลื่อน (Intersection Observer) ----------
+    const cards = document.querySelectorAll('.card');
+    
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // ให้ Hero Banner แสดงทันที
+    document.querySelector('.top-banner').style.opacity = '1';
+
+    // ---------- 4. Modal ยืนยันการโทร ----------
     function showConfirmDialog(options) {
         const existing = document.getElementById('dynamicConfirmModal');
         if(existing) existing.remove();
@@ -671,10 +738,10 @@
         let iconHtml = '', title = '', message = '', actionHtml = '';
         
         if(options.type === 'call') {
-            iconHtml = '<i class="fas fa-phone-alt" style="color:#1e7e34; font-size:3rem;"></i>';
+            iconHtml = '<i class="fas fa-phone-alt" style="color:#0066cc; font-size:3rem;"></i>';
             title = '📞 โทรติดต่อด่วน';
             message = `คุณต้องการโทรไปที่หมายเลข ${options.value} ใช่หรือไม่?`;
-            actionHtml = `<button class="modal-action" id="confirmCallDynamic" style="background:#1e7e34; color:white; border:none; padding:14px; border-radius:60px; font-weight:bold; cursor:pointer;"><i class="fas fa-phone"></i> โทร ${options.value}</button>
+            actionHtml = `<button class="modal-action" id="confirmCallDynamic" style="background:#0066cc; color:white; border:none; padding:14px; border-radius:60px; font-weight:bold; cursor:pointer;"><i class="fas fa-phone"></i> โทร ${options.value}</button>
                          <button class="modal-action secondary" id="cancelDynamic" style="background:#e9ecef; border:none; padding:14px; border-radius:60px; cursor:pointer;">ยกเลิก</button>`;
         } else if(options.type === 'line') {
             iconHtml = '<i class="fab fa-line" style="color:#00a859; font-size:3rem;"></i>';
