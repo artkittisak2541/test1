@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>โชคสมัยสูบส้วม | รถดูดส้วมอุบลราชธานี บริการ 24ชม. มืออาชีพ</title>
     
-    <!-- SEO Meta Tags -->
     <meta name="description" content="โชคสมัยสูบส้วม บริการรถดูดส้วมอุบลราชธานี รับดูดส้วม ขุดเพิ่มบ่อ ดูดน้ำเสีย ดูดไขมัน แก้ท่ออุดตัน ทุกพื้นที่ รวดเร็ว ฉับไว ราคายุติธรรม โทร 081-075-0833">
     <meta name="keywords" content="รถดูดส้วมอุบล,รถดูดส้วมอุบลราชธานี,ดูดส้วม,ขุดเพิ่มบ่อ,ดูดน้ำเสีย,ดูดไขมัน,ท่ออุดตัน,โชคสมัยสูบส้วม,ส้วมตัน,ท่อตัน,อุบลราชธานี">
     <meta name="author" content="โชคสมัยสูบส้วม">
@@ -14,17 +13,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <link rel="canonical" href="https://www.choksmai-subsab.com/">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="โชคสมัยสูบส้วม - รถดูดส้วมอุบลราชธานี บริการ 24ชม.">
     <meta property="og:description" content="รับดูดส้วม ขุดเพิ่มบ่อ ดูดน้ำเสีย ไขมัน แก้ท่ออุดตัน พื้นที่อุบลฯ และใกล้เคียง ประสบการณ์กว่า10ปี">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.choksmai-subsab.com/">
     <meta property="og:locale" content="th_TH">
     
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- Structured Data LocalBusiness + AEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -71,37 +67,40 @@
             top: 20px;
             left: 20px;
             z-index: 2000;
-            background: #1e7e34;
+            background: linear-gradient(135deg, #1e7e34, #27ae60);
             width: 52px;
             height: 52px;
-            border-radius: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            transition: .25s;
             color: white;
-            font-size: 28px;
+            font-size: 24px;
+        }
+        .nav-hamburger:hover {
+            transform: scale(1.05);
         }
         .nav-hamburger i {
             transition: transform 0.2s;
         }
+        
         .side-menu {
             position: fixed;
             top: 0;
             left: -280px;
             width: 280px;
             height: 100%;
-            background: #ffffff;
+            background: linear-gradient(180deg, #ffffff, #f5faf7);
             z-index: 1999;
-            box-shadow: 4px 0 24px rgba(0,0,0,0.2);
-            transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 4px 0 30px rgba(0,0,0,0.15);
+            transition: left .3s ease;
             padding-top: 80px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            backdrop-filter: blur(2px);
+            gap: 6px;
         }
         .side-menu.open {
             left: 0;
@@ -128,6 +127,7 @@
             border-left-color: #1e7e34;
             padding-left: 32px;
         }
+        
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -139,6 +139,7 @@
             visibility: hidden;
             opacity: 0;
             transition: 0.2s;
+            backdrop-filter: blur(4px);
         }
         .menu-overlay.active {
             visibility: visible;
@@ -175,19 +176,24 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.4);
         }
         
-        /* รูปเลื่อนอัตโนมัติแนวนอน จากขวาไปซ้ายแบบสมูทใหม่ */
+        /* รูปเลื่อนอัตโนมัติแนวนอน */
         .slider-wrapper {
             margin-top: 32px;
             overflow-x: auto;
             white-space: nowrap;
-            scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             padding-bottom: 12px;
             cursor: grab;
             user-select: none;
-            scroll-behavior: smooth;
             position: relative;
+        }
+        .slider-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        .slider-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
         }
         .slider-wrapper:active {
             cursor: grabbing;
@@ -207,7 +213,6 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.4);
             border: 2px solid rgba(255,255,255,0.5);
             transition: 0.2s;
-            scroll-snap-align: start;
             pointer-events: none;
         }
         .slider-images img:hover {
@@ -461,7 +466,6 @@
 </head>
 <body>
 
-<!-- 4 ขีด Hamburger + Side Menu -->
 <div class="nav-hamburger" id="hamburgerBtn">
     <i class="fas fa-bars"></i>
 </div>
@@ -476,14 +480,12 @@
 
 <div class="container">
     
-    <!-- Hero Banner (id="home") -->
     <div id="home" class="top-banner">
         <h1><i class="fas fa-tools"></i> โชคสมัยสูบส้วม</h1>
         <p>
             บริการรถดูดส้วม ขุดเพิ่มบ่อ ดูดน้ำเสีย น้ำไขมัน ท่ออุดตัน<br>
             บริการด้วยใจ รวดเร็วฉับไว ไปทุกที่
         </p>
-        <!-- รูปเลื่อนแนวนอน: ขวาไปซ้าย ใหม่สมูท -->
         <div class="slider-wrapper" id="imageSlider">
             <div class="slider-images" id="sliderInner">
                 <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=500" alt="รถดูดส้วม">
@@ -501,7 +503,6 @@
         </div>
     </div>
 
-    <!-- บริการ -->
     <div id="services" class="card">
         <div class="section-title"><i class="fas fa-star-of-life" style="color:#1e7e34;"></i> บริการของเรา <span>ครบวงจร อุบลราชธานี</span></div>
         <div class="service-grid">
@@ -518,7 +519,6 @@
         </div>
     </div>
 
-    <!-- พื้นที่บริการ + ประสบการณ์ -->
     <div id="area" class="card">
         <div class="section-title"><i class="fas fa-map-marker-alt"></i> พื้นที่ให้บริการ</div>
         <div class="area-wrapper">
@@ -541,7 +541,6 @@
         <p style="text-align: center; font-weight: 500;">✔ บริการรถดูดส้วม รับดูดส้วม ส้วมเต็ม ส้วมตัน สูบไขมัน สูบสิ่งปฏิกูล แก้ไขปัญหาท่ออุดตันทุกชนิด<br>✔ ช่างมืออาชีพ พร้อมให้บริการ 24 ชั่วโมง ทุกพื้นที่ในจังหวัดอุบลราชธานี</p>
     </div>
 
-    <!-- ติดต่อเรา (card) -->
     <div id="contact-card" class="card">
         <div class="section-title"><i class="fas fa-headset"></i> ติดต่อสอบถาม / จองบริการด่วน</div>
         <div class="contact-row" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
@@ -551,7 +550,6 @@
         <p style="text-align: center; margin-top: 1rem;">🚀 โทรเลยวันนี้ รับบริการทันใจ มาตรฐานมืออาชีพ</p>
     </div>
 
-    <!-- แผนที่ -->
     <div id="map" class="card">
         <div class="section-title"><i class="fas fa-map"></i> สำนักงานใหญ่ (อุบลราชธานี)</div>
         <div style="border-radius: 1.5rem; overflow: hidden; margin-bottom: 1rem;">
@@ -570,7 +568,6 @@
     </footer>
 </div>
 
-<!-- FAB ใหม่ รวมทุกช่องทางไว้ในปุ่มลอย -->
 <div class="fab-container">
     <div class="fab-menu" id="fabMenu">
         <a href="javascript:void(0)" class="fab-item call" data-phone="0810750833"><i class="fas fa-phone-alt"></i></a>
@@ -586,67 +583,30 @@
 <div id="backToTop" class="back2top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
 
 <script>
-    // ---------- 1. เลื่อนรูปอัตโนมัติแบบ SMOOTH ขวาไปซ้าย (Loop) ----------
-    const sliderContainer = document.getElementById('imageSlider');
-    const sliderInner = document.getElementById('sliderInner');
-    let autoInterval;
-    let isDragging = false;
-    let isAutoScrolling = true;
-    
-    function smoothScrollRightToLeft() {
-        if (!sliderContainer || !isAutoScrolling) return;
-        const step = 1.6; // ความเร็วสมูท
-        let currentScroll = sliderContainer.scrollLeft;
-        const maxScroll = sliderContainer.scrollWidth - sliderContainer.clientWidth;
-        let nextScroll = currentScroll + step;
-        if (nextScroll >= maxScroll) {
-            // วนกลับไปที่จุดเริ่มต้นแบบเนียนๆ (reset)
-            nextScroll = 0;
-        }
-        sliderContainer.scrollTo({ left: nextScroll, behavior: 'smooth' });
-    }
-    
-    function startAutoScroll() {
-        if (autoInterval) clearInterval(autoInterval);
-        isAutoScrolling = true;
-        autoInterval = setInterval(() => {
-            if (!isDragging && sliderContainer && isAutoScrolling) {
-                smoothScrollRightToLeft();
+    // ---------- 1. เลื่อนรูปอัตโนมัติแบบ SMOOTH ขวาไปซ้าย ----------
+    const slider = document.getElementById("imageSlider");
+
+    let scrollSpeed = 0.5;
+    let isHover = false;
+
+    function autoScroll() {
+        if (!isHover && slider) {
+            slider.scrollLeft += scrollSpeed;
+
+            if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+                slider.scrollLeft = 0;
             }
-        }, 38); // 38ms ทำให้ต่อเนื่องนุ่มนวล
-    }
-    
-    function stopAutoScroll() {
-        if (autoInterval) {
-            clearInterval(autoInterval);
-            autoInterval = null;
         }
-        isAutoScrolling = false;
+        requestAnimationFrame(autoScroll);
     }
-    
-    // รองรับการลากและแตะ
-    if (sliderContainer) {
-        const startAutoAfterDrag = () => {
-            setTimeout(() => {
-                if (!isDragging && !autoInterval) {
-                    startAutoScroll();
-                }
-            }, 2000);
-        };
-        
-        sliderContainer.addEventListener('mousedown', () => { isDragging = true; stopAutoScroll(); });
-        sliderContainer.addEventListener('mouseup', () => { isDragging = false; startAutoAfterDrag(); });
-        sliderContainer.addEventListener('mouseleave', () => { isDragging = false; startAutoAfterDrag(); });
-        
-        sliderContainer.addEventListener('touchstart', () => { isDragging = true; stopAutoScroll(); });
-        sliderContainer.addEventListener('touchend', () => { isDragging = false; startAutoAfterDrag(); });
-        
-        // ป้องกัน default drag รูป
-        sliderContainer.querySelectorAll('img').forEach(img => {
-            img.addEventListener('dragstart', (e) => e.preventDefault());
-        });
-        
-        startAutoScroll();
+
+    if (slider) {
+        slider.addEventListener("mouseenter", () => isHover = true);
+        slider.addEventListener("mouseleave", () => isHover = false);
+        slider.addEventListener("touchstart", () => isHover = true);
+        slider.addEventListener("touchend", () => isHover = false);
+
+        autoScroll();
     }
     
     // ---------- 2. เมนูแฮมเบอร์เกอร์ + ปิด/เปิด + เลื่อนไปยังส่วนต่างๆ ----------
@@ -685,7 +645,7 @@
                           <button class="modal-action secondary" id="cancelDynamic" style="background:#e9ecef; border:none; padding:14px; border-radius:60px;">ยกเลิก</button>`;
         } else if(options.type === 'line') {
             iconHtml = '<i class="fab fa-line" style="color:#00a859; font-size:3rem;"></i>';
-            title = '💬 เปิดไลน์官方';
+            title = '💬 เปิดไลน์ทางการ';
             message = `ต้องการเปิดแชท LINE ID: ${options.value} หรือไม่?`;
             actionHtml = `<button class="modal-action" id="confirmLineDynamic" style="background:#00a859; color:white; border:none; padding:14px; border-radius:60px;"><i class="fab fa-line"></i> เปิด LINE</button>
                           <button class="modal-action secondary" id="cancelDynamic" style="background:#e9ecef;">ยกเลิก</button>`;
